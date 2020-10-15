@@ -25,7 +25,19 @@ const reducer = (state = initialState, action) => {
       };
 
     case ADD_BOOK:
-    //UPDATE THE STATE ACCORDINGLY
+      //action.payload.theAuthor["books"] = state.author.books.concat(action.payload.book)
+      // console.log(action.payload.book)
+      // console.log(action.payload.theAuthor)
+      // console.log("inside ADD_BOOK")
+      const newAuthor = {
+        ...state.author,
+        books: state.author.books.concat(action.payload.book)
+      }
+    return {
+      ...state,
+      author: newAuthor,
+      loading: false,
+    }
 
     default:
       return state;

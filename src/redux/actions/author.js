@@ -1,4 +1,6 @@
-import { SET_AUTHOR_LOADING, SET_AUTHOR_DETAIL } from "./actionTypes";
+import { SET_AUTHOR_LOADING, SET_AUTHOR_DETAIL, ADD_BOOK, SET_ERRORS, SET_AUTHORS } from "./actionTypes";
+
+import { resetErrors } from "./errors";
 
 import axios from "axios";
 
@@ -21,6 +23,21 @@ export const fetchAuthorDetail = (authorID) => async (dispatch) => {
 };
 
 //POST THE BOOK TO https://the-index-api.herokuapp.com/api/books/
-export const postBook = (book, closeModal) => {
-  alert("I DON'T DO ANYTHING YET!");
-};
+export const postBook = (book, closeModal, author) => async (dispatch) => {
+    try {
+      const res = await instance.post("/api/books/", book);
+      const newBook = res.data;
+      dispatch(resetErrors());
+      dispatch({
+        type: ADD_BOOK,
+        payload: {book: newBook, theAuthor:author},
+      });
+      closeModal();
+    } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    }
+  }
+

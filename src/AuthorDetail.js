@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 // Components
 import BookTable from "./BookTable";
 import Loading from "./Loading";
+import AddBookModal from "./AddBookModal"
 
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -30,6 +31,7 @@ const AuthorDetail = (props) => {
           />
         </div>
         <BookTable books={author.books} />
+        <AddBookModal author={author}/>
       </div>
     );
   }

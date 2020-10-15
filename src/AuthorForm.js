@@ -22,6 +22,11 @@ const AuthorForm = (props) => {
     props.postAuthor(author, props.closeModal);
   };
 
+  const textChangeHandler = (event) => {
+    setAuthor({...author, [event.target.name]:event.target.value})
+
+  }
+
   const errors = props.errors;
 
   return (
@@ -38,19 +43,19 @@ const AuthorForm = (props) => {
           <div className="input-group-prepend">
             <span className="input-group-text">First Name</span>
           </div>
-          <input type="text" className="form-control" name="first_name" />
+          <input type="text" className="form-control" value={author.first_name} name="first_name" onChange={textChangeHandler}/>
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">Last Name</span>
           </div>
-          <input type="text" className="form-control" name="last_name" />
+          <input type="text" className="form-control" value={author.last_name} name="last_name" onChange={textChangeHandler}/>
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">Image URL</span>
           </div>
-          <input type="text" className="form-control" name="imageUrl" />
+          <input type="text" className="form-control" value={author.imageUrl} name="imageUrl"onChange={textChangeHandler} />
         </div>
         <input type="submit" />
       </form>
